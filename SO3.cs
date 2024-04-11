@@ -13,7 +13,7 @@ namespace SO3
             Alternative winner= new();
             foreach (Alternative alt in alts)
             {
-                if (alt.VrednostAlternative(alt) < winner.VrednostAlternative(alt))
+                if (alt.Value > winner.Value)
                 {
                     winner = alt;
                 }

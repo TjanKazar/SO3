@@ -1,4 +1,10 @@
-﻿namespace SO3
+﻿
+
+using OxyPlot.Series;
+using OxyPlot;
+using OxyPlot.WindowsForms;
+
+namespace SO3
 {
     public partial class Form1 : Form
     {
@@ -36,60 +42,65 @@
         private void button1_Click(object sender, EventArgs e)
         {
             alternatives.Clear();
-            List<string> AltNames = new();
-            List<string> ParamNames = SO3.GetParamNames(parametri_table);
 
-            foreach (string ParamName in ParamNames)
+            List<string> AltNames = new List<string>();
+            for (int i = 1; i < parametri_table.Columns.Count; i += 2)
             {
-                Console.WriteLine(ParamName);
-                
-            }
-            Console.WriteLine(ParamNames.Count());
-
-            int columnCount = parametri_table.Columns.Count;
-
-            for (int j = 1; j < columnCount; j += 2) 
-            {
-                string headerText = parametri_table.Columns[j].HeaderText;
+                string headerText = parametri_table.Columns[i].HeaderText;
                 AltNames.Add(headerText.Substring(0, headerText.Length - 7));
             }
 
-            // Iterate through DataGridView rows starting from the second row and up to the second-to-last row
-            for (int i = 0; i < parametri_table.Rows.Count - 1; i++) // Start from index 1 to skip the header row, and stop before the last row
+            for (int altIndex = 0; altIndex < AltNames.Count; altIndex++)
             {
+                List<Parameter> parametri = new List<Parameter>();
 
-                // Create a list to store Parameter objects for the current Alternative
-                List<Parameter> parameters = new List<Parameter>();
-
-                // Iterate through DataGridView columns starting from the second column
-                for (int j = 1; j < columnCount; j += 2) // Start from index 1 to skip the name column, and increment by 2 to get every second column
+                for (int rowIndex = 0; rowIndex < parametri_table.Rows.Count - 1; rowIndex++)
                 {
-                    // Extract value and weight from the current cell
-                    int value = Convert.ToInt32(parametri_table.Rows[i].Cells[j].Value);
-                    int weight = Convert.ToInt32(parametri_table.Rows[i].Cells[j + 1].Value); // Assume weight is in the next column
+                    Parameter param = new Parameter();
 
-                    // Create Parameter object and add it to the list of parameters
-                    Parameter parameter = new Parameter(weight, ParamNames[j-1], value);
-                    parameters.Add(parameter);
+                    string paramName = parametri_table.Rows[rowIndex].Cells[0].Value?.ToString();
+                    string valueText = parametri_table.Rows[rowIndex].Cells[1 + altIndex * 2].Value?.ToString();
+
+                    string weightText = parametri_table.Rows[rowIndex].Cells[2 + altIndex * 2].Value?.ToString();
+
+                    int value, weight;
+                    if (int.TryParse(valueText, out value) && int.TryParse(weightText, out weight))
+                    {
+                        param.Name = paramName;
+                        param.Value = value;
+                        param.Weight = weight;
+
+                        parametri.Add(param);
+
+                        Console.WriteLine($"Parameter: Name: {param.Name}, Value: {param.Value}, Weight: {param.Weight}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Invalid value or weight in row {rowIndex + 1}");
+                    }
                 }
 
-                // Create Alternative object with the list of parameters and add it to alternatives list
-                Alternative alternative = new(AltNames[i], parameters);
-                alternatives.Add(alternative);
-            }
+                Alternative alt = new Alternative
+                {
+                    ime = AltNames[altIndex],
+                    parametri = parametri
+                };
+                alt.Value = Alternative.VrednostAlternative(alt);
 
-            // Display the names list
+                alternatives.Add(alt);
+            }
             Console.WriteLine("Names list:");
             foreach (string name in AltNames)
             {
                 Console.WriteLine(name);
             }
 
-            // Display the contents of the alternatives list
             Console.WriteLine("Alternative list:");
             foreach (Alternative alternative in alternatives)
             {
                 Console.WriteLine($"Alternative Name: {alternative.ime}");
+                Console.WriteLine($"Alternative Value: {alternative.Value}");
+
                 Console.WriteLine("Parameters:");
                 foreach (Parameter parameter in alternative.parametri)
                 {
@@ -98,8 +109,16 @@
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Primerjava_Alternativ Graf1 = new Primerjava_Alternativ(alternatives);
+            Graf1.Show();
+        }
 
-
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            utezi Graf2 = new utezi(alternatives);
+            Graf2.Show();
+        }
     }
 }

@@ -10,7 +10,13 @@ namespace SO3
     {
         public string? ime { get; set; }
         public List<Parameter>? parametri { get; set; }
+        public int Value { get; set; }
         public Alternative() { }
+
+        public Alternative(string? ime, List<Parameter>? parametri, int value) : this(ime, parametri)
+        {
+            Value = value;
+        }
 
         public Alternative(string? ime, List<Parameter>? parametri)
         {
@@ -18,15 +24,21 @@ namespace SO3
             this.parametri = parametri;
         }
 
-        public int VrednostAlternative(Alternative alt)
+        public static int VrednostAlternative(Alternative alt)
         {
-            int seštevek;
+            int sestevek = 0;
             foreach (Parameter p in alt.parametri)
             {
                 int točke = p.Value * p.Weight;
-                seštevek = +točke;
+                sestevek += točke; 
             }
-            return 0;
+            if (sestevek != 0)
+                return sestevek;
+            else
+            {
+                Console.WriteLine("vrednost alternative null, nekaj ni vrede");
+                return 0;
+            }
         }
     }
 }

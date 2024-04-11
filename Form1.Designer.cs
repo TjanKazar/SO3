@@ -34,6 +34,8 @@
             parametri_table = new DataGridView();
             Alternative_name = new TextBox();
             errorText1 = new Label();
+            button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)parametri_table).BeginInit();
             SuspendLayout();
             // 
@@ -94,11 +96,33 @@
             errorText1.TabIndex = 6;
             errorText1.Text = "Izpolnite obrazec za dodajanje alternative";
             // 
+            // button2
+            // 
+            button2.Location = new Point(245, 376);
+            button2.Name = "button2";
+            button2.Size = new Size(88, 56);
+            button2.TabIndex = 7;
+            button2.Text = "Alternative";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(375, 376);
+            button3.Name = "button3";
+            button3.Size = new Size(88, 56);
+            button3.TabIndex = 8;
+            button3.Text = "Uteži";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(errorText1);
             Controls.Add(Alternative_name);
             Controls.Add(parametri_table);
@@ -120,5 +144,7 @@
         private DataGridView parametri_table;
         private TextBox Alternative_name;
         private Label errorText1;
+        private Button button2;
+        private Button button3;
     }
 }
