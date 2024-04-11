@@ -21,7 +21,7 @@ namespace SO3
         {
             var model = new PlotModel
             {
-                Title = "Pie Chart of Weight Parameters",
+                Title = "Utezi",
                 Background = OxyColors.White
             };
 

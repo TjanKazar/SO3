@@ -10,6 +10,7 @@ namespace SO3
     {
         public List<Alternative> alternatives = new List<Alternative>();
         public string columnName;
+        public string param;
 
         public Form1()
         {
@@ -84,7 +85,15 @@ namespace SO3
                 {
                     ime = AltNames[altIndex],
                     parametri = parametri
+
                 };
+                if (comboBox1.Items.Count == 0)
+                {
+                foreach (Parameter p in parametri)
+                {
+                    comboBox1.Items.Add(p.Name);
+                }
+                }
                 alt.Value = Alternative.VrednostAlternative(alt);
 
                 alternatives.Add(alt);
@@ -119,6 +128,17 @@ namespace SO3
         {
             utezi Graf2 = new utezi(alternatives);
             Graf2.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AnalizaObcutljivosti Graf3 = new AnalizaObcutljivosti(alternatives, param);
+            Graf3.Show();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            param = comboBox1.Text;
         }
     }
 }

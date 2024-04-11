@@ -36,6 +36,9 @@
             errorText1 = new Label();
             button2 = new Button();
             button3 = new Button();
+            button4 = new Button();
+            comboBox1 = new ComboBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)parametri_table).BeginInit();
             SuspendLayout();
             // 
@@ -98,9 +101,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(245, 376);
+            button2.Location = new Point(12, 236);
             button2.Name = "button2";
-            button2.Size = new Size(88, 56);
+            button2.Size = new Size(88, 62);
             button2.TabIndex = 7;
             button2.Text = "Alternative";
             button2.UseVisualStyleBackColor = true;
@@ -108,19 +111,50 @@
             // 
             // button3
             // 
-            button3.Location = new Point(375, 376);
+            button3.Location = new Point(129, 236);
             button3.Name = "button3";
-            button3.Size = new Size(88, 56);
+            button3.Size = new Size(88, 62);
             button3.TabIndex = 8;
             button3.Text = "Uteži";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(12, 376);
+            button4.Name = "button4";
+            button4.Size = new Size(88, 62);
+            button4.TabIndex = 9;
+            button4.Text = "Analiza Občutljivosti";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(118, 376);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 10;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(129, 358);
+            label2.Name = "label2";
+            label2.Size = new Size(95, 15);
+            label2.TabIndex = 11;
+            label2.Text = "izberi parameter:";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
+            Controls.Add(comboBox1);
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(errorText1);
@@ -146,5 +180,8 @@
         private Label errorText1;
         private Button button2;
         private Button button3;
+        private Button button4;
+        private ComboBox comboBox1;
+        private Label label2;
     }
 }
