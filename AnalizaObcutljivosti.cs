@@ -19,10 +19,10 @@ namespace SO3
             InitializeComponent();
             this.alternatives = alternatives;
             this.selectedParameter = selectedParameter;
-            ShowLineGraph();
+            CrtniGraf();
         }
 
-        private void ShowLineGraph()
+        private void CrtniGraf()
         {
             var model = new PlotModel
             {
@@ -56,7 +56,7 @@ namespace SO3
 
                 for (int weight = 0; weight <= 10; weight++)
                 {
-                    int parameterValue = CalculateParameterValue(alt, weight);
+                    int parameterValue = ParameterVrednost(alt, weight);
                     lineSeries.Points.Add(new DataPoint(weight, parameterValue));
                 }
 
@@ -66,7 +66,7 @@ namespace SO3
             plotView1.Model = model;
         }
 
-        private int CalculateParameterValue(Alternative alt, int weight)
+        private int ParameterVrednost(Alternative alt, int weight)
         {
             if (alt.parametri.Exists(p => p.Name == selectedParameter))
             {

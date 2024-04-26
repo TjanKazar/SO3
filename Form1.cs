@@ -61,7 +61,6 @@ namespace SO3
 
                     string paramName = parametri_table.Rows[rowIndex].Cells[0].Value?.ToString();
                     string valueText = parametri_table.Rows[rowIndex].Cells[1 + altIndex * 2].Value?.ToString();
-
                     string weightText = parametri_table.Rows[rowIndex].Cells[2 + altIndex * 2].Value?.ToString();
 
                     int value, weight;
@@ -77,7 +76,7 @@ namespace SO3
                     }
                     else
                     {
-                        Console.WriteLine($"Invalid value or weight in row {rowIndex + 1}");
+                        Console.WriteLine($"Neprimerna vrednost na : {rowIndex + 1}");
                     }
                 }
 
