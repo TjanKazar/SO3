@@ -8,7 +8,7 @@ namespace SO3
 {
     internal class SO3
     {
-        //comment
+        //komentar
         public static Alternative GetWinner(List<Alternative> alts)
         {
             Alternative winner= new();
